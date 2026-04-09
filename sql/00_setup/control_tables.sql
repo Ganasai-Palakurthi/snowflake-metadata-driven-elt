@@ -11,6 +11,7 @@ CREATE OR REPLACE TABLE LOAD_CONFIG (
     SOURCE_TABLE          STRING         NOT NULL,
     TARGET_TABLE          STRING         NOT NULL,
     LOAD_TYPE             STRING         NOT NULL,   -- FULL / INCREMENTAL
+    LOAD_MODE             STRING         NOT NULL,   -- TRUNCATE_INSERT / MERGE
     ACTIVE_FLAG           BOOLEAN        NOT NULL DEFAULT TRUE,
     PIPELINE_DESCRIPTION  STRING,
     CREATED_AT            TIMESTAMP_NTZ  NOT NULL DEFAULT CURRENT_TIMESTAMP(),
@@ -33,8 +34,6 @@ CREATE OR REPLACE TABLE COLUMN_MAPPING (
     UPDATED_AT            TIMESTAMP_NTZ  NOT NULL DEFAULT CURRENT_TIMESTAMP()
 );
 
--- =========================================================
--- OPTIONAL CHECKS
--- =========================================================
+-- Optional validation
 DESC TABLE LOAD_CONFIG;
 DESC TABLE COLUMN_MAPPING;
