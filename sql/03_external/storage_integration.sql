@@ -1,0 +1,6 @@
+CREATE OR REPLACE STORAGE INTEGRATION S3_METADATA_INT
+    TYPE = EXTERNAL_STAGE
+    STORAGE_PROVIDER = S3
+    ENABLED = TRUE
+    STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::873873310101:role/S3_Access_Snowflake'
+    STORAGE_ALLOWED_LOCATIONS = ('s3://sales-metadata-driven-elt/metadata/');
