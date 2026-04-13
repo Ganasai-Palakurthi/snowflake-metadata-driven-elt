@@ -30,17 +30,15 @@ jobs:
       - name: Install Snowflake CLI
         run: pip install snowflake-cli-labs
 
-      - name: Create Snowflake connection
+      - name: Test Snowflake connection
         run: |
-          export SNOWFLAKE_PASSWORD=$SNOWFLAKE_PASSWORD
-
-          snow connection add \
-            --connection-name dev-conn \
+          snow sql \
             --account $SNOWFLAKE_ACCOUNT \
             --user $SNOWFLAKE_USER \
+            --password $SNOWFLAKE_PASSWORD \
             --warehouse $SNOWFLAKE_WAREHOUSE \
-            --role $SNOWFLAKE_ROLE
-            --no-interactive
+            --role $SNOWFLAKE_ROLE \
+            -q "SELECT CURRENT_USER(), CURRENT_ROLE();"
 
       - name: Deploy setup objects
         run: |
