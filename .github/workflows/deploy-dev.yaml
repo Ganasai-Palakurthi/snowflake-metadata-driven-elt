@@ -1,0 +1,74 @@
+name: Deploy to Snowflake Dev
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      SNOWFLAKE_DATABASE: SALES_DWH_DEV
+      SNOWFLAKE_SCHEMA: CONTROL
+      SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Snowflake CLI
+        run: pip install snowflake-cli-labs
+
+      - name: Create Snowflake connection
+        run: |
+          snow connection add dev-conn \
+            --account $SNOWFLAKE_ACCOUNT \
+            --user $SNOWFLAKE_USER \
+            --password $SNOWFLAKE_PASSWORD \
+            --warehouse $SNOWFLAKE_WAREHOUSE \
+            --role $SNOWFLAKE_ROLE
+
+      - name: Deploy setup objects
+        run: |
+          snow sql -c dev-conn -f sql/00_setup/schemas.sql
+          snow sql -c dev-conn -f sql/00_setup/storage_integration.sql
+          snow sql -c dev-conn -f sql/00_setup/file_formats.sql
+          snow sql -c dev-conn -f sql/00_setup/stages.sql
+
+      - name: Deploy bronze tables
+        run: |
+          snow sql -c dev-conn -f sql/01_bronze/source_bronze.sql
+          snow sql -c dev-conn -f sql/01_bronze/validate_bronze_customer.sql
+
+      - name: Deploy metadata tables and load metadata
+        run: |
+          snow sql -c dev-conn -f sql/02-metadata/control_tables.sql
+          snow sql -c dev-conn -f sql/02-metadata/load_metadata.sql
+
+      - name: Deploy silver tables
+        run: |
+          snow sql -c dev-conn -f sql/03_Silver/target_tables.sql
+
+      - name: Deploy procedures
+        run: |
+          snow sql -c dev-conn -f sql/04_procedures/sp_load_pipeline.sql
+
+      - name: Run customer pipeline
+        run: |
+          snow sql -c dev-conn -f sql/05_runs/run_customer_pipeline.sql
+
+      - name: Validate silver customer
+        run: |
+          snow sql -c dev-conn -f sql/06_validation/validate_silver_customer.sql
