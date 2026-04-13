@@ -32,10 +32,11 @@ jobs:
 
       - name: Create Snowflake connection
         run: |
+          export SNOWFLAKE_PASSWORD=$SNOWFLAKE_PASSWORD
+
           snow connection add dev-conn \
             --account $SNOWFLAKE_ACCOUNT \
             --user $SNOWFLAKE_USER \
-            --password $SNOWFLAKE_PASSWORD \
             --warehouse $SNOWFLAKE_WAREHOUSE \
             --role $SNOWFLAKE_ROLE
 
