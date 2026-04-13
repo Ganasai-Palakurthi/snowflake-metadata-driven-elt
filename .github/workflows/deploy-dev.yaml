@@ -38,6 +38,7 @@ jobs:
 
       - name: Deploy metadata tables and load metadata
         run: |
+          snow sql -x -f sql/02-metadata/pipeline_run_log.sql
           snow sql -x -f sql/02-metadata/control_tables.sql
           snow sql -x -f sql/02-metadata/load_metadata.sql
 
