@@ -9,6 +9,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      SNOWFLAKE_AUTHENTICATOR: SNOWFLAKE_JWT
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PRIVATE_KEY_RAW: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}
 
     steps:
       - uses: actions/checkout@v5
@@ -16,21 +21,16 @@ jobs:
       - uses: snowflakedb/snowflake-cli-action@v2.0
 
       - name: Test Snowflake connection
-        env:
-          SNOWFLAKE_AUTHENTICATOR: SNOWFLAKE_JWT
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-          SNOWFLAKE_PRIVATE_KEY_RAW: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}
         run: |
           snow connection test -x
 
 
       - name: Deploy setup objects
         run: |
-          snow sql -c dev-conn -f sql/00_setup/schemas.sql
-          snow sql -c dev-conn -f sql/00_setup/storage_integration.sql
-          snow sql -c dev-conn -f sql/00_setup/file_formats.sql
-          snow sql -c dev-conn -f sql/00_setup/stages.sql
+          snow sql -c -x -f sql/00_setup/schemas.sql
+          snow sql -c -x -f sql/00_setup/storage_integration.sql
+          snow sql -c -x -f sql/00_setup/file_formats.sql
+          snow sql -c -x -f sql/00_setup/stages.sql
 
       - name: Deploy bronze tables
         run: |
@@ -44,7 +44,7 @@ jobs:
 
       - name: Deploy silver tables
         run: |
-          snow sql -c dev-conn -f sql/03_Silver/target_tables.sql
+          snow sql -c dev-conn -f sql/03_silver/target_tables.sql
 
       - name: Deploy procedures
         run: |
