@@ -1,7 +1,7 @@
 USE DATABASE SALES_DWH_DEV;
 USE SCHEMA CONTROL;
 
-CREATE OR REPLACE TABLE PIPELINE_RUN_LOG (
+CREATE TABLE IF NOT EXISTS PIPELINE_RUN_LOG (
                                              RUN_ID NUMBER IDENTITY(1,1),
                                              PIPELINE_NAME STRING,
                                              SOURCE_TABLE STRING,

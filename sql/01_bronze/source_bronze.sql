@@ -6,7 +6,7 @@ USE SCHEMA BRONZE;
 
 
 -- Create raw customer table to store source data as received
-CREATE OR REPLACE TABLE CUSTOMER_RAW (
+CREATE TABLE IF NOT EXISTS CUSTOMER_RAW (
                                          CustomerID NUMBER,
                                          PersonID NUMBER,
                                          StoreID NUMBER,
@@ -19,4 +19,36 @@ CREATE OR REPLACE TABLE CUSTOMER_RAW (
 
 COPY INTO CUSTOMER_RAW
     FROM @SALES_DWH_DEV.CONTROL.BRONZE_STAGE/customer/
+    FILE_FORMAT = (FORMAT_NAME = SALES_DWH_DEV.CONTROL.CSV_FILE_FORMAT);
+
+CREATE TABLE IF NOT EXISTS PRODUCT_RAW (
+                                        ProductID NUMBER,
+                                        Name STRING,
+                                        ProductNumber STRING,
+                                        MakeFlag NUMBER(1),
+                                        FinishedGoodsFlag NUMBER(1),
+                                        Color STRING,
+                                        SafetyStockLevel NUMBER,
+                                        ReorderPoint NUMBER,
+                                        StandardCost NUMBER(10,2),
+                                        ListPrice NUMBER(10,2),
+                                        Size STRING,
+                                        SizeUnitMeasureCode STRING,
+                                        WeightUnitMeasureCode STRING,
+                                        Weight NUMBER(10,2),
+                                        DaysToManufacture NUMBER,
+                                        ProductLine STRING,
+                                        Class STRING,
+                                        Style STRING,
+                                        ProductSubcategoryID NUMBER,
+                                        ProductModelID NUMBER,
+                                        SellStartDate TIMESTAMP_NTZ,
+                                        SellEndDate TIMESTAMP_NTZ,
+                                        DiscontinuedDate TIMESTAMP_NTZ,
+                                        rowguid STRING,
+                                        ModifiedDate TIMESTAMP_NTZ
+);
+
+COPY INTO CUSTOMER_RAW
+    FROM @SALES_DWH_DEV.CONTROL.BRONZE_STAGE/product/
     FILE_FORMAT = (FORMAT_NAME = SALES_DWH_DEV.CONTROL.CSV_FILE_FORMAT);

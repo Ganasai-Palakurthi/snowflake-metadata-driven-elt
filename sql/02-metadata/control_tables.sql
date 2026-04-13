@@ -6,7 +6,7 @@ USE SCHEMA CONTROL;
 -- One row per pipeline
 -- Stores source-to-target pipeline metadata
 -- =========================================================
-CREATE OR REPLACE TABLE LOAD_CONFIG (
+CREATE TABLE IF NOT EXISTS LOAD_CONFIG (
                                         PIPELINE_NAME         STRING         NOT NULL,
                                         SOURCE_TABLE          STRING         NOT NULL,
                                         TARGET_TABLE          STRING         NOT NULL,
@@ -23,7 +23,7 @@ CREATE OR REPLACE TABLE LOAD_CONFIG (
 -- One row per target column for a pipeline
 -- Stores transformation/mapping metadata
 -- =========================================================
-CREATE OR REPLACE TABLE COLUMN_MAPPING (
+CREATE TABLE IF NOT EXISTS COLUMN_MAPPING (
                                            PIPELINE_NAME         STRING         NOT NULL,
                                            COLUMN_SEQUENCE       NUMBER(10,0)   NOT NULL,
                                            SOURCE_COLUMN         STRING,
