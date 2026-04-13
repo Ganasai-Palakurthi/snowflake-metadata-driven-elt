@@ -34,7 +34,8 @@ jobs:
         run: |
           export SNOWFLAKE_PASSWORD=$SNOWFLAKE_PASSWORD
 
-          snow connection add dev-conn \
+          snow connection add \
+            --connection-name dev-conn \
             --account $SNOWFLAKE_ACCOUNT \
             --user $SNOWFLAKE_USER \
             --warehouse $SNOWFLAKE_WAREHOUSE \
