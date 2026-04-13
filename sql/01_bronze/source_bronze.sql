@@ -13,8 +13,7 @@ CREATE OR REPLACE TABLE CUSTOMER_RAW (
                                          TerritoryID NUMBER,
                                          AccountNumber STRING,
                                          rowguid STRING,
-
-                                         ModifiedDate TIMESTAMP_NTZ,
+                                         ModifiedDate TIMESTAMP_NTZ
 );
 
 
