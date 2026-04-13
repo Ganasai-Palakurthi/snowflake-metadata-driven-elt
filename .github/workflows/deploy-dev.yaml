@@ -27,10 +27,10 @@ jobs:
 
       - name: Deploy setup objects
         run: |
-          snow sql -c -x -f sql/00_setup/schemas.sql
-          snow sql -c -x -f sql/00_setup/storage_integration.sql
-          snow sql -c -x -f sql/00_setup/file_formats.sql
-          snow sql -c -x -f sql/00_setup/stages.sql
+          snow sql -x -f sql/00_setup/schemas.sql
+          snow sql -x -f sql/00_setup/storage_integration.sql
+          snow sql -x -f sql/00_setup/file_formats.sql
+          snow sql -x -f sql/00_setup/stages.sql
 
       - name: Deploy bronze tables
         run: |
