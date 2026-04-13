@@ -40,6 +40,7 @@ jobs:
             --user $SNOWFLAKE_USER \
             --warehouse $SNOWFLAKE_WAREHOUSE \
             --role $SNOWFLAKE_ROLE
+            --no-interactive
 
       - name: Deploy setup objects
         run: |
