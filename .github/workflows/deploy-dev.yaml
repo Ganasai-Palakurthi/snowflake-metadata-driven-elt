@@ -28,32 +28,31 @@ jobs:
       - name: Deploy setup objects
         run: |
           snow sql -x -f sql/00_setup/schemas.sql
-          snow sql -x -f sql/00_setup/storage_integration.sql
           snow sql -x -f sql/00_setup/file_formats.sql
           snow sql -x -f sql/00_setup/stages.sql
 
       - name: Deploy bronze tables
         run: |
-          snow sql -c dev-conn -f sql/01_bronze/source_bronze.sql
-          snow sql -c dev-conn -f sql/01_bronze/validate_bronze_customer.sql
+          snow sql -x -f sql/01_bronze/source_bronze.sql
+          snow sql -x -f sql/01_bronze/validate_bronze_customer.sql
 
       - name: Deploy metadata tables and load metadata
         run: |
-          snow sql -c dev-conn -f sql/02-metadata/control_tables.sql
-          snow sql -c dev-conn -f sql/02-metadata/load_metadata.sql
+          snow sql -x -f sql/02-metadata/control_tables.sql
+          snow sql -x -f sql/02-metadata/load_metadata.sql
 
       - name: Deploy silver tables
         run: |
-          snow sql -c dev-conn -f sql/03_silver/target_tables.sql
+          snow sql -x -f sql/03_silver/target_tables.sql
 
       - name: Deploy procedures
         run: |
-          snow sql -c dev-conn -f sql/04_procedures/sp_load_pipeline.sql
+          snow sql -x -f sql/04_procedures/sp_load_pipeline.sql
 
       - name: Run customer pipeline
         run: |
-          snow sql -c dev-conn -f sql/05_runs/run_customer_pipeline.sql
+          snow sql -x -f sql/05_runs/run_customer_pipeline.sql
 
       - name: Validate silver customer
         run: |
-          snow sql -c dev-conn -f sql/06_validation/validate_silver_customer.sql
+          snow sql -x -f sql/06_validation/validate_silver_customer.sql
