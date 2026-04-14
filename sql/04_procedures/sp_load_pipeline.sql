@@ -122,9 +122,11 @@ EXCEPTION
         UPDATE SALES_DWH_DEV.CONTROL.PIPELINE_RUN_LOG
         SET STATUS = 'FAILED',
             END_TIME = :V_END_TIME,
-            ERROR_MESSAGE = 'Execution failed'
+            ERROR_MESSAGE = SQLERRM,
+            EXECUTED_SQL = :V_SQL
         WHERE RUN_ID = :V_RUN_ID;
 
-        RETURN 'FAILED: Pipeline ' || PIPELINE_NAME_ARG;
+        RETURN 'FAILED: Pipeline ' || PIPELINE_NAME_ARG || ' | Error: ' || SQLERRM;
+
 END;
 $$;

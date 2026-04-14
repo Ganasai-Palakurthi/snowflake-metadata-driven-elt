@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS CUSTOMER_CLEAN (
 -- Optional validation
 DESC TABLE CUSTOMER_CLEAN;
 
-SELECT * FROM SALES_DWH_DEV.SILVER.CUSTOMER_CLEAN;
+SELECT * FROM SALES_DWH_DEV.SILVER.CUSTOMER_CLEAN LIMIT 10;
 
 CREATE TABLE IF NOT EXISTS PRODUCT_CLEAN (
                                              PRODUCTID                NUMBER,
@@ -48,3 +48,5 @@ CREATE TABLE IF NOT EXISTS PRODUCT_CLEAN (
                                              ROWGUID                  STRING,
                                              MODIFIEDDATE             TIMESTAMP_NTZ
 );
+
+SELECT * FROM PRODUCT_CLEAN LIMIT 10;
