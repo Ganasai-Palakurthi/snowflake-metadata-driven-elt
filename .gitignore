@@ -7,3 +7,5 @@
 /dataSources/
 /dataSources.local.xml
 .idea/
+snowflake_key.p8
+snowflake_key.pub
