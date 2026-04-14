@@ -56,3 +56,51 @@ COPY INTO PRODUCT_RAW
     FILE_FORMAT = (FORMAT_NAME = SALES_DWH_DEV.CONTROL.CSV_FILE_FORMAT);
 
 SELECT * FROM PRODUCT_RAW LIMIT 5;
+
+CREATE TABLE IF NOT EXISTS SALES_ORDER_DETAIL_RAW (
+                                                   SalesOrderID NUMBER,
+                                                   SalesOrderDetailID NUMBER,
+                                                   CarrierTrackingNumber STRING,
+                                                   OrderQty NUMBER,
+                                                   ProductID NUMBER,
+                                                   SpecialOfferID NUMBER,
+                                                   UnitPrice NUMBER(10,5),
+                                                   UnitPriceDiscount NUMBER(10,2),
+                                                   LineTotal NUMBER(12,6),
+                                                   rowguid STRING,
+                                                   ModifiedDate TIMESTAMP_NTZ
+);
+
+SELECT * FROM SALES_ORDER_DETAIL_RAW LIMIT 5;
+
+-- Create raw sales order header table for order-level transactional data
+CREATE TABLE IF NOT EXISTS SALES_ORDER_HEADER_RAW (
+                                                   SalesOrderID NUMBER,
+                                                   RevisionNumber NUMBER,
+                                                   OrderDate TIMESTAMP_NTZ,
+                                                   DueDate TIMESTAMP_NTZ,
+                                                   ShipDate TIMESTAMP_NTZ,
+                                                   Status NUMBER,
+                                                   OnlineOrderFlag NUMBER(1),
+                                                   SalesOrderNumber STRING,
+                                                   PurchaseOrderNumber STRING,
+                                                   AccountNumber STRING,
+                                                   CustomerID NUMBER,
+                                                   SalesPersonID NUMBER,
+                                                   TerritoryID NUMBER,
+                                                   BillToAddressID NUMBER,
+                                                   ShipToAddressID NUMBER,
+                                                   ShipMethodID NUMBER,
+                                                   CreditCardID NUMBER,
+                                                   CreditCardApprovalCode STRING,
+                                                   CurrencyRateID NUMBER,
+                                                   SubTotal NUMBER(12,4),
+                                                   TaxAmt NUMBER(10,4),
+                                                   Freight NUMBER(10,4),
+                                                   TotalDue NUMBER(12,6),
+                                                   Comment STRING,
+                                                   rowguid STRING,
+                                                   ModifiedDate TIMESTAMP_NTZ
+);
+
+SELECT * FROM SALES_ORDER_HEADER_RAW LIMIT 10;
