@@ -57,7 +57,7 @@ COPY INTO PRODUCT_RAW
 
 SELECT * FROM PRODUCT_RAW LIMIT 5;
 
-CREATE OR REPLACE TABLE SALES_ORDER_DETAIL_RAW (
+CREATE TABLE IF NOT EXISTS SALES_ORDER_DETAIL_RAW (
                                                    SalesOrderID NUMBER,
                                                    SalesOrderDetailID NUMBER,
                                                    CarrierTrackingNumber STRING,
@@ -74,7 +74,7 @@ CREATE OR REPLACE TABLE SALES_ORDER_DETAIL_RAW (
 SELECT * FROM SALES_ORDER_DETAIL_RAW LIMIT 5;
 
 -- Create raw sales order header table for order-level transactional data
-CREATE OR REPLACE TABLE SALES_ORDER_HEADER_RAW (
+CREATE TABLE IF NOT EXISTS SALES_ORDER_HEADER_RAW (
                                                    SalesOrderID NUMBER,
                                                    RevisionNumber NUMBER,
                                                    OrderDate TIMESTAMP_NTZ,
@@ -103,4 +103,4 @@ CREATE OR REPLACE TABLE SALES_ORDER_HEADER_RAW (
                                                    ModifiedDate TIMESTAMP_NTZ
 );
 
-SELECT * FROM SALES_ORDER_HEADER_RAW LIMIT 10;
+SELECT * FROM SALES_ORDER_HEADER_RAW LIMIT 5;

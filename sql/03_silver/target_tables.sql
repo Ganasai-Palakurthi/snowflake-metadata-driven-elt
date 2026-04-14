@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS PRODUCT_CLEAN (
 
 SELECT * FROM PRODUCT_CLEAN LIMIT 10;
 
-CREATE TABLE IF NOT EXISTS SALES_ORDER_DETAIL_CLEAN (
+CREATE OR REPLACE TABLE SALES_ORDER_DETAIL_CLEAN (
                                                         SALESORDERID NUMBER,
                                                         SALESORDERDETAILID NUMBER,
                                                         CARRIERTRACKINGNUMBER STRING,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS SALES_ORDER_DETAIL_CLEAN (
 
 SELECT * FROM SALES_ORDER_DETAIL_CLEAN LIMIT 10;
 
-CREATE TABLE IF NOT EXISTS SALES_ORDER_HEADER_CLEAN (
+CREATE OR REPLACE TABLE SALES_ORDER_HEADER_CLEAN (
                                                         SALESORDERID NUMBER,
                                                         REVISIONNUMBER NUMBER,
                                                         ORDERDATE TIMESTAMP_NTZ,
