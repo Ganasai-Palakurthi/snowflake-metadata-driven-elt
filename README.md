@@ -3,8 +3,9 @@
 ## 📌 Overview
 This project implements a metadata-driven ETL pipeline using Snowflake, Amazon S3, and GitHub Actions. The goal is to build a scalable and reusable data pipeline where new datasets can be onboarded without modifying core logic. Instead of writing separate SQL for each table, the pipeline dynamically generates SQL using metadata.
 
-## 🏗️ Architecture
-![Architecture Diagram](./docs/architecture.png)
+## 🏗️ Architecture<p align="center" style="margin:0; padding:0;">
+  <img src="./docs/architecture.png" width="95%" style="max-height: 350px; display:block; margin:auto;" />
+</p>
 
 ## 🔄 Data Flow
 S3 → Snowflake Stage → Bronze Tables → Metadata (LOAD_CONFIG, COLUMN_MAPPING) → SP_LOAD_PIPELINE → Silver Tables → Validation → Audit Logging
