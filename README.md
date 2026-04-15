@@ -1,7 +1,7 @@
-# 🚀 Metadata-Driven ETL Pipeline in Snowflake
+# 🚀 Metadata-Driven ELT Pipeline in Snowflake
 
 ## 📌 Overview
-This project implements a metadata-driven ETL pipeline using Snowflake, Amazon S3, and GitHub Actions. The goal is to build a scalable and reusable data pipeline where new datasets can be onboarded without modifying core logic. Instead of writing separate SQL for each table, the pipeline dynamically generates SQL using metadata.
+This project implements a metadata-driven ELT pipeline using Snowflake, Amazon S3, and GitHub Actions. The goal is to build a scalable and reusable data pipeline where new datasets can be onboarded without modifying core logic. Instead of writing separate SQL for each table, the pipeline dynamically generates SQL using metadata.
 
 ## 🏗️ Architecture<p align="center" style="margin:0; padding:0;">
   <img src="./docs/architecture.png" width="95%" style="max-height: 350px; display:block; margin:auto;" />
@@ -69,7 +69,7 @@ Workflow steps include:
 Snowflake, SQL (Snowflake Scripting), Amazon S3, GitHub Actions, Snowflake CLI
 
 ## 💡 Key Features
-- Metadata-driven ETL design  
+- Metadata-driven ELT design  
 - Dynamic SQL generation  
 - Reusable pipeline framework  
 - Separation of Bronze and Silver layers  
@@ -80,7 +80,7 @@ Snowflake, SQL (Snowflake Scripting), Amazon S3, GitHub Actions, Snowflake CLI
 - Debugging dynamic SQL generated from metadata  
 - Handling errors in Snowflake stored procedures  
 - Ensuring consistency between metadata and table structures  
-- Designing reusable ETL frameworks instead of static pipelines  
+- Designing reusable ELT frameworks instead of static pipelines  
 
 ## 🔮 Future Enhancements
 - Incremental loading (CDC)  
@@ -89,7 +89,7 @@ Snowflake, SQL (Snowflake Scripting), Amazon S3, GitHub Actions, Snowflake CLI
 - Multi-table joins using metadata  
 
 ## 📌 Summary
-This project demonstrates how to build a scalable metadata-driven ETL framework in Snowflake, enabling reusable and maintainable data pipelines aligned with modern data engineering practices.
+This project demonstrates how to build a scalable metadata-driven ELT framework in Snowflake, enabling reusable and maintainable data pipelines aligned with modern data engineering practices.
 
 ## 👨‍💻 Author
 Ganasai Palakurthi  
