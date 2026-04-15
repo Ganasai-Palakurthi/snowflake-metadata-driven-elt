@@ -71,6 +71,10 @@ CREATE TABLE IF NOT EXISTS SALES_ORDER_DETAIL_RAW (
                                                    ModifiedDate TIMESTAMP_NTZ
 );
 
+COPY INTO SALES_ORDER_DETAIL_RAW
+    FROM @SALES_EXT_STAGE/sales_order_detail/
+    FILE_FORMAT = (FORMAT_NAME = CSV_FILE_FORMAT);
+
 SELECT * FROM SALES_ORDER_DETAIL_RAW LIMIT 5;
 
 -- Create raw sales order header table for order-level transactional data
@@ -102,5 +106,9 @@ CREATE TABLE IF NOT EXISTS SALES_ORDER_HEADER_RAW (
                                                    rowguid STRING,
                                                    ModifiedDate TIMESTAMP_NTZ
 );
+
+COPY INTO SALES_ORDER_HEADER_RAW
+    FROM @SALES_EXT_STAGE/sales_order_header/
+    FILE_FORMAT = (FORMAT_NAME = CSV_FILE_FORMAT);
 
 SELECT * FROM SALES_ORDER_HEADER_RAW LIMIT 5;
