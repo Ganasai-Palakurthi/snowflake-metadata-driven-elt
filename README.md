@@ -44,6 +44,7 @@ Example:
 CALL CONTROL.SP_LOAD_PIPELINE('LOAD_CUSTOMER');
 CALL CONTROL.SP_LOAD_PIPELINE('LOAD_PRODUCT');
 CALL CONTROL.SP_LOAD_PIPELINE('LOAD_SALES_DETAIL');
+CALL CONTROL.SP_LOAD_PIPELINE('LOAD_SALES_HEADER');
 
 ## 📊 Audit Logging
 Pipeline execution is tracked using CONTROL.PIPELINE_RUN_LOG. It captures pipeline name, execution status, start and end time, rows processed, executed SQL, and error messages. This enables monitoring and debugging.
